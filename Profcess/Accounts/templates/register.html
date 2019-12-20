@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" id ="sign-up-box">
+  <h2 id = "sign-up-text">Sign Up</h2>
+  <form method="post" action = "{% url 'register' %}">
+    {% csrf_token %}
+    {% if form1.non_field_errors %}<div class="alert alert-danger">{{ form1.non_field_errors }}</div>{% endif %}
+
+    {% for field in form1 %}
+    <div class="form-group {% if field.errors %}alert alert-danger{% endif %}">
+      {{ field.errors }}
+      {{ field.label_tag }}
+      {{ field }}
+      {% if field.help_text %}<small class="text-muted">{{ field.help_text|safe }}</small>{% endif %}
+    </div>
+    {% endfor %}
+
+    <button id = "sign-up-button" type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+</div>
+{% endblock %}
